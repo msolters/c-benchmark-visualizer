@@ -1,4 +1,4 @@
 Template.registerHelper 'connected', ->
   connected.get()
 Template.registerHelper 'isData', ->
-  BenchmarkMsgs.find().count()
+  window.benchmarkMsgArray.get().length

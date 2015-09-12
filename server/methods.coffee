@@ -17,19 +17,19 @@ Meteor.methods
       console.log 'Port open'
       serialPort.on 'data', Meteor.bindEnvironment (data) ->
         unless data is 'init'
-          #console.log data
+          #
+          # (1) Process non-initialization data by splitting it
+          #     by tabs.  Make sure ints are valid numbers!
+          #
           dataParts = data.split '\t'
           _t = parseInt dataParts[1]
           _order = parseInt dataParts[2]
           if isNaN(_t) or isNaN(_order)
             return
-          newMsg_q =
+          Streamy.broadcast 'benchmarkMsg',
             label: dataParts[0]
-          newMsg_update =
-            $set:
-              t: _t
-              order: _order
-          BenchmarkMsgs.upsert newMsg_q, newMsg_update
+            order: _order
+            t: _t
   openSerialPort: =>
     serialPort.open()
   closeSerialPort: =>

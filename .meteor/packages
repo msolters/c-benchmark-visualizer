@@ -12,7 +12,7 @@ meteorhacks:npm
 npm-container
 coffeescript
 jagi:reactive-map
-msavin:mongol
 materialize:materialize
 grove:less
 reactive-var
+yuukan:streamy

@@ -1,13 +1,39 @@
-@measurements = new ReactiveMap()
-@labels = new ReactiveMap()
 @connected = new ReactiveVar false
-@mxm = 0
+@mxm = new ReactiveVar 0
+@sum = new ReactiveVar 0
+@benchmarkMsgs = new ReactiveMap()
+@benchmarkMsgArray = new ReactiveVar []
 
 ###
 #     Template.visualizer
 ###
 Template.visualizer.created = ->
-  @subscribe 'BenchmarkMsgs'
+  Streamy.on 'benchmarkMsg', (d, s) ->
+    #
+    # (1) Add new data to dictionary.
+    #
+    benchmarkMsgs.set d.label,
+      order: d.order
+      t: d.t
+    #
+    # (2) Sort new data into ordered array.
+    #
+    _msgs = []
+    _sum = 0
+    for label, data of benchmarkMsgs.all()
+      _sum += data.t
+      _msgs.push
+        label: label
+        order: data.order
+        t: data.t
+    benchmarkMsgArray.set _.sortBy _msgs, (n) ->
+      n.order
+    sum.set _sum
+    #
+    # (3) Update maximum
+    #
+    mxm.set Math.max(mxm.get(), _sum)
+
 
 Template.visualizer.rendered = ->
   #
@@ -15,50 +41,15 @@ Template.visualizer.rendered = ->
   #
   Meteor.call "checkIfPortIsOpen", (err, resp) ->
     connected.set resp
-  #
-  # (2) Populate @msgs with the latest data
-  #
-  @autorun =>
-    observer = BenchmarkMsgs.find( ).observeChanges
-      added: (_id, doc) =>
-        labels.set _id,
-          label: doc.label
-          order: doc.order
-      changed: (_id, doc) =>
-        measurements.set _id, doc.t
 
 Template.visualizer.helpers
-  benchMarkData: =>
-    #Template.instance().benchMarkData.get()
-    #
-    # (1) Construct list of messages, compute sum.
-    #
-    msgs = []
-    sum = 0
-    for _id, t of measurements.all()
-      sum += t unless isNaN t
-      msgInfo = labels.get(_id)
-      msgs.push
-        _id: _id
-        label: msgInfo.label
-        order: msgInfo.order
-        t: t
-    #
-    # (2) Check if sum is a new mxmimum.
-    #
-    window.mxm = Math.max(sum, window.mxm)
-    #
-    # (3) Sort messages by order of generation.
-    #
-    msgs = _.sortBy msgs, (n) -> n.order
-    return {
-      msgs: msgs
-      total: sum
-      max: window.mxm
-    }
+  benchmarkMsgs: ->
+    benchmarkMsgArray.get()
+  mxm: ->
+    mxm.get()
+  sum: =>
+    sum.get()
 
-Template.visualizer.destroyed = ->
-  Meteor.call "closeSerialPort"
 
 ###
 #       Template.axisLabel
