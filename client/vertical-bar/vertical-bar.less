@@ -1,0 +1,40 @@
+@import "constants";
+
+.vbar-column {
+  position: relative;
+}
+.vbar-container {
+  position: relative;
+  flex-grow: 1;
+}
+.vbar {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: height;
+  z-index: 0;
+  opacity: 0.9;
+}
+.vbar:hover {
+  z-index: 1;
+}
+.vbar-ms {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: #fff;
+  z-index: 2;
+  pointer-events: none;
+}
+.vbar-label {
+  height: @chartGutterBottom;
+  position: absolute;
+  width: 100%;
+  bottom: -@chartGutterBottom;
+}
+.vbar-label > div {
+  color: #fff;
+  margin-top: 5px;
+  padding: 5px;
+}

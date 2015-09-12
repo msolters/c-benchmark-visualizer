@@ -1,0 +1,18 @@
+<template name="visualizer">
+  <div class="chart-container flex flex-row">
+    {{> axisLabel fraction=1 total=benchMarkData.max}}
+    {{> axisLabel fraction=0.5 total=benchMarkData.max}}
+    {{> axisLabel fraction=0.25 total=benchMarkData.max}}
+    {{> axisLabel fraction=0 total=benchMarkData.max}}
+    {{> verticalBar label="Total" value=benchMarkData.total total=benchMarkData.max color="blue-grey"}}
+    {{#each benchMarkData.msgs}}
+      {{> verticalBar label=label value=t total=benchMarkData.max color="amber darken-4"}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="axisLabel">
+  <div class="axis-label white-text" style="bottom: {{yPos}};">
+    {{label}}ms
+  </div>
+</template>

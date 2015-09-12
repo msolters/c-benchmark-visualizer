@@ -1,0 +1,16 @@
+@import "constants";
+
+.chart-container {
+  height: calc(~"90% - @{chartGutterBottom}");
+  position: relative;
+  margin-bottom: @chartGutterBottom;
+  margin-left: @chartGutterLeft;
+  margin-top: 35px;
+}
+.axis-label {
+  position: absolute;
+  left: -@chartGutterLeft;
+  border-bottom: 1px solid;
+  width: calc(~"100% + @{chartGutterLeft}");
+  padding-left: 20px;
+}

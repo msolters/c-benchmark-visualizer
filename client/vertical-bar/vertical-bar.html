@@ -1,0 +1,13 @@
+<template name="verticalBar">
+  <div class="vbar-column flex flex-column flex-end flex-equal">
+    <div class="vbar-container">
+      <div class="vbar-ms center">
+        {{value}}ms
+      </div>
+      <div class="vbar {{#if color}}{{color}}{{else}}blue{{/if}} hoverable"></div>
+    </div>
+    <div class="vbar-label center">
+      <div>{{label}}</div>
+    </div>
+  </div>
+</template>
