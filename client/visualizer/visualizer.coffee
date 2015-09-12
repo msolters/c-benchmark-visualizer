@@ -2,7 +2,7 @@
 @mxm = new ReactiveVar 0
 @sum = new ReactiveVar 0
 @benchmarkMsgs = new ReactiveMap()
-@benchmarkMsgArray = new ReactiveVar []
+@benchmarkMsgArray = new ReactiveVar 0
 
 ###
 #     Template.visualizer
@@ -40,7 +40,11 @@ Template.visualizer.rendered = ->
   # (1) Check if a serial port is already open.
   #
   Meteor.call "checkIfPortIsOpen", (err, resp) ->
-    connected.set resp
+    meteorMethodCB err, resp
+    if resp.success
+      connected.set resp.connected
+    else
+      connected.set false
 
 Template.visualizer.helpers
   benchmarkMsgs: ->
