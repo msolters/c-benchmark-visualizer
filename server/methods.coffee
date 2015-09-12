@@ -45,5 +45,3 @@ Meteor.methods
       serialPort.isOpen()
     catch error
       #
-  clearAllData: ->
-    BenchmarkMsgs.remove({})
