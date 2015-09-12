@@ -1,0 +1,8 @@
+<template name="controls">
+  <div id="control-bar" class="flex flex-row flex-start">
+    {{> portSelector }}
+  <!--  <button data-open-port type="button" class="btn waves-effect waves-light green">Read</button> -->
+    <button data-close-port type="button" class="btn waves-effect waves-light red {{#unless connected}}disabled{{/unless}}">Stop</button>
+    <button data-clear-data type="button" class="btn waves-effect waves-light grey {{#unless isData}}disabled{{/unless}}">Clear</button>
+  </div>
+</template>
