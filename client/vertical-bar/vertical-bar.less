@@ -6,6 +6,7 @@
 .vbar-container {
   position: relative;
   flex-grow: 1;
+  cursor: pointer;
 }
 .vbar {
   width: 100%;
@@ -15,13 +16,11 @@
   transition: height;
   z-index: 0;
   opacity: 0.9;
-}
-.vbar:hover {
-  z-index: 1;
+  transition: background-color 0.3s ease-in-out;
 }
 .vbar-ms {
   position: absolute;
-  bottom: 0;
+  /*bottom: 0;*/
   width: 100%;
   color: #fff;
   z-index: 2;

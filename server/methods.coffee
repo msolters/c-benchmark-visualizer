@@ -71,6 +71,30 @@ Meteor.methods
         success: false
         msg: "An error occurred while trying to list local serial ports: #{error}"
       }
+  pauseSerialPort: ->
+    try
+      serialPort.pause()
+      return {
+        success: true
+        msg: "Serial connection is paused."
+      }
+    catch error
+      return {
+        success: false
+        msg: "An error occurred while trying to pause the serial connection: #{error}"
+      }
+  resumeSerialPort: ->
+    try
+      serialPort.resume()
+      return {
+        success: true
+        msg: "Serial connection resumed."
+      }
+    catch error
+      return {
+        success: false
+        msg: "An error occurred while trying to resume the serial connection: #{error}"
+      }
   checkIfPortIsOpen: ->
     if !serialPort?
       return {

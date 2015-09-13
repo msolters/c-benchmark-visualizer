@@ -1,7 +1,13 @@
 <template name="controls">
   <div id="control-bar" class="flex flex-row flex-start">
     {{> portSelector }}
-  <!--  <button data-open-port type="button" class="btn waves-effect waves-light green">Read</button> -->
+    {{#if connected}}
+      <button data-pause-port type="button" class="btn waves-effect waves-light orange {{#if paused}}disabled{{/if}}"><i class="fa fa-fw fa-pause"></i></button>
+      <button data-resume-port type="button" class="btn waves-effect waves-light green {{#unless paused}}disabled{{/unless}}"><i class="fa fa-fw fa-play"></i></button>
+    {{else}}
+      <button data-pause-port type="button" class="btn waves-effect waves-light orange disabled"><i class="fa fa-fw fa-pause"></i></button>
+      <button data-resume-port type="button" class="btn waves-effect waves-light green disabled"><i class="fa fa-fw fa-play"></i></button>
+    {{/if}}
     <button data-close-port type="button" class="btn waves-effect waves-light red {{#unless connected}}disabled{{/unless}}">Stop</button>
     <button data-clear-data type="button" class="btn waves-effect waves-light grey {{#unless isData}}disabled{{/unless}}">Clear</button>
   </div>

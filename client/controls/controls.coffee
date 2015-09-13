@@ -1,4 +1,14 @@
 Template.controls.events
+  'click button[data-pause-port]': ->
+    Meteor.call "pauseSerialPort", (err, resp) ->
+      meteorMethodCB err, resp
+      if resp.success
+        paused.set true
+  'click button[data-resume-port]': ->
+    Meteor.call "resumeSerialPort", (err, resp) ->
+      meteorMethodCB err, resp
+      if resp.success
+        paused.set false
   'click button[data-close-port]': ->
     Meteor.call "closeSerialPort", (err, resp) ->
       meteorMethodCB err, resp
@@ -10,6 +20,6 @@ Template.controls.events
         sum.set 0
         benchmarkMsgs.clear()
         benchmarkMsgArray.set []
-        Materialize.toast "Successfully cleared local data.", 4500, "green"
+        Materialize.toast "Successfully cleared local data.", 4500, "purple"
       catch error
         Materialize.toast "An error occurred while trying to clear local data: #{error}", 4500, "red"

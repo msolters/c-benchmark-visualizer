@@ -1,12 +1,12 @@
 <template name="portSelector">
   <!-- Dropdown Trigger -->
-  <a class='dropdown-button btn {{#if connected}}disabled{{/if}} amber darken-4' data-refresh-ports href='#' data-activates='port-dropdown'>Choose Port</a>
+  <a class='dropdown-button btn {{#if connected}}disabled{{/if}} purple' data-refresh-ports href='#' data-activates='port-dropdown'>Choose Port</a>
 
   <!-- Dropdown Structure -->
   <ul id='port-dropdown' class='dropdown-content'>
     {{#each ports}}
       <li>
-        <a data-choose-port class="grey-text text-darken-4">{{manufacturer}}, {{comName}}</a>
+        <a data-choose-port class="purple-text">{{manufacturer}}, {{comName}}</a>
       </li>
       <li class="divider"></li>
     {{/each}}

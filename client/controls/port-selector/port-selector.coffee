@@ -7,7 +7,7 @@ Template.portSelector.helpers
 
 Template.portSelector.events
   'click a[data-refresh-ports]': (event, template) ->
-    Materialize.toast "Scanning local serial ports...", 4500, "grey darken-3"
+    Materialize.toast "Scanning local serial ports...", 4500, "white black-text"
     Meteor.call 'listSerialPorts', (err, resp) =>
       meteorMethodCB err, resp
       template.ports.set resp.ports if !err?
@@ -15,3 +15,4 @@ Template.portSelector.events
     Meteor.call 'chooseSerialPort', @comName, (err, resp) ->
       #console.log err
       connected.set true
+      paused.set false

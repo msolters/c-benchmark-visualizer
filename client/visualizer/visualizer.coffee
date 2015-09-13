@@ -1,13 +1,18 @@
-@connected = new ReactiveVar false
-@mxm = new ReactiveVar 0
-@sum = new ReactiveVar 0
-@benchmarkMsgs = new ReactiveMap()
-@benchmarkMsgArray = new ReactiveVar 0
-
 ###
 #     Template.visualizer
 ###
 Template.visualizer.created = ->
+  #
+  # (1) Check if a serial port is already open.
+  #
+  Meteor.call "checkIfPortIsOpen", (err, resp) ->
+    meteorMethodCB err, resp
+    if resp.success
+      connected.set resp.connected
+      paused.set !resp.connected
+    else
+      connected.set false
+      paused.set true
   Streamy.on 'benchmarkMsg', (d, s) ->
     #
     # (1) Add new data to dictionary.
@@ -34,17 +39,6 @@ Template.visualizer.created = ->
     #
     mxm.set Math.max(mxm.get(), _sum)
 
-
-Template.visualizer.rendered = ->
-  #
-  # (1) Check if a serial port is already open.
-  #
-  Meteor.call "checkIfPortIsOpen", (err, resp) ->
-    meteorMethodCB err, resp
-    if resp.success
-      connected.set resp.connected
-    else
-      connected.set false
 
 Template.visualizer.helpers
   benchmarkMsgs: ->
