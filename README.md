@@ -1,9 +1,17 @@
 # c-benchmark-visualizer
 This is a tool for analyzing the performance time of C-based microcontroller applications in realtime.
 
-It consists of three main parts:
+Here's what you need:
 
-*  Include `benchmark.h` into your C project, which provides the `benchmark(label)` command that will emit timer signals.
+*  A computer with a USB port
+*  A [Particle Photon](http://particle.io) (although you can easily port the provided C++ to use an Arduino or anything else that can handle 2 simultaneous serial connections)
+*  An embedded C project on a uC with at least one available USART TX pin
+
+How does it work?  The attached C code will provide a mechanism for your embedded code to send signals to the Photon that describe where in your code the uC is, by using a single USART pin connection.  We connect the Photon to the computer, and use a local electrified Meteor app to chart high fidelity timestamp results streaming from it in realtime.
+
+In a nutshell, the project consists of three main parts:
+
+*  In your embedded C project, include `benchmark.h`.  This provides the `benchmark(label)` command that will emit timer signals.
 *  `application.cpp` is Photon firmware that allows the Photon to act as an application stopwatch and report the results to the PC by USB.
 *  The Meteor app, which graphs the results streaming from the Photon in realtime.
 
