@@ -30,36 +30,36 @@ This is the easiest option.  Inside the [Photon cloud IDE](http://build.particle
 Then, just compile and flash to your Photon!
 
 #### Compile and Flash Locally
-First, clone the latest vanilla Photon firmware.
-```bash
-  git clone git@github.com:spark/firmware
-  cd ./firmware
-  git checkout latest
-```
+1.  First, clone the latest vanilla Photon firmware.
+  ```bash
+    git clone git@github.com:spark/firmware
+    cd ./firmware
+    git checkout latest
+  ```
 
-Plug the Photon in, and put it into DFU mode (flashing yellow).  Go into the `/modules` folder, build the vanilla firmware and flash it to the Photon.  Then move back up to `/firmware`.
-```bash
-  cd ./modules
-  sudo make PLATFORM=photon clean all program-dfu
-  cd ..
-```
+1.  Plug the Photon in, and put it into DFU mode (flashing yellow).  Go into the `/modules` folder, build the vanilla firmware and flash it to the Photon.  Then move back up to `/firmware`.
+  ```bash
+    cd ./modules
+    sudo make PLATFORM=photon clean all program-dfu
+    cd ..
+  ```
 
-Next, copy `application.cpp` into its own application folder inside `/firmware/user/applications`.
-```bash
-  cp r c-benchmark-visualizer/Photon/benchmark-visualizer ./user/applications
-```
+1.  Next, copy `application.cpp` into its own application folder inside `/firmware/user/applications`.
+  ```bash
+    cp r c-benchmark-visualizer/Photon/benchmark-visualizer ./user/applications
+  ```
 
-Go into the `/main` folder and compile it.  Then move back up to `/firmware`.
-```bash
-  cd ./main
-  sudo make PLATFORM=photon APP=benchmark-visualizer
-  cd ..
-```
+1.  Go into the `/main` folder and compile it.  Then move back up to `/firmware`.
+  ```bash
+    cd ./main
+    sudo make PLATFORM=photon APP=benchmark-visualizer
+    cd ..
+  ```
 
-Finally, flash the compiled firmware to the Photon!  Make sure it's in DFU mode.
-```bash
-  sudo particle flash --usb build/target/user-part/platform-6-m/benchmark-visualizer.bin
-```
+1.  Finally, flash the compiled firmware to the Photon!  Make sure it's in DFU mode.
+  ```bash
+    sudo particle flash --usb build/target/user-part/platform-6-m/benchmark-visualizer.bin
+  ```
 
 ### Implement `benchmark.h` into your uC Application
 Copy `C/benchmark.h` into your microcontroller project.  Include it with `#include "benchmark.h"`.  This will give you two commands to use in your project.
