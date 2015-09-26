@@ -29,7 +29,7 @@ This is the easiest option.  Inside the [Photon cloud IDE](http://build.particle
 
 Then, just compile and flash to your Photon!
 
-### Compile and Flash Locally
+#### Compile and Flash Locally
 First, clone the latest vanilla Photon firmware.
 ```bash
   git clone git@github.com:spark/firmware
@@ -61,7 +61,7 @@ Finally, flash the compiled firmware to the Photon!  Make sure it's in DFU mode.
   sudo particle flash --usb build/target/user-part/platform-6-m/benchmark-visualizer.bin
 ```
 
-## Implement `benchmark.h` into your uC Application
+### Implement `benchmark.h` into your uC Application
 Copy `C/benchmark.h` into your microcontroller project.  Include it with `#include "benchmark.h"`.  This will give you two commands to use in your project.
 
 Command | Use
@@ -71,10 +71,10 @@ Command | Use
 
 **It is very important that the USART bus you are using to connect your uC to the Photon is configured to have a 11500 baud rate.**  Otherwise, the Photon's firmware will not catch the `benchmark()` signals!
 
-## Connect the uC to the Photon
+### Connect the uC to the Photon
 `benchmark.h` uses `printf()` to output timestamp labels to the Photon.  So you'll need to connect the USART TX pin of your uC to the RX pin of the Photon, and make sure that `printf()` is configured to that TX pin's register.
 
-## Launch the Meteor App
+### Launch the Meteor App
 ```bash
   cd c-benchmark-visualizer/Meteor
   meteor
