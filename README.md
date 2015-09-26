@@ -67,9 +67,9 @@ Copy `C/benchmark.h` into your microcontroller project.  Include it with `#inclu
 Command | Use
 ---|---
 `benchmark_sync()` | Call this method once at the very beginning of your code's `while` loop.  It keeps your measurements in sync, and also defines the order of measurements to be reported.
-`benchmark( label )` | Call this method anywhere in your C code to find out how much time has elapsed since the last `benchmark()` call.  `label` is just a string that describes that point in the code -- it will become the label of the corresponding bar in the visualizer chart.  *Therefore, it is important you always use a unique `label` for every `benchmark( label )` call.*
+`benchmark(label)` | Call this method anywhere in your C code to find out how much time has elapsed since the last `benchmark()` call.  `label` is just a string that describes that point in the code -- it will become the label of the corresponding bar in the visualizer chart.  *Therefore, it is important you always use a unique `label` for every `benchmark(label)` call.*
 
-**It is very important that the USART bus you are using to connect your uC to the Photon is configured to have a 11500 baud rate.**  Otherwise, the Photon's firmware will not catch the `benchmark()` signals!
+**It is very important that the USART bus you are using to connect your uC to the Photon is configured to have a 115200 baud rate.**  Otherwise, the Photon's firmware will not catch the `benchmark()` signals!
 
 ### Connect the uC to the Photon
 `benchmark.h` uses `printf()` to output timestamp labels to the Photon.  So you'll need to connect the USART TX pin of your uC to the RX pin of the Photon, and make sure that `printf()` is configured to that TX pin's register.
