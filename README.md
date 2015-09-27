@@ -1,6 +1,8 @@
 # c-benchmark-visualizer
 This is a tool for analyzing the performance time of C-based microcontroller applications in realtime.
 
+![](example-output.gif)
+
 Here's what you need:
 
 *  A computer with a USB port
